@@ -1,0 +1,142 @@
+<html>
+
+	<head>
+		<title>View Airplanes</title>
+		<script type="text/javascript">
+
+			function generateInfo(xmlDoc){
+				ELEMENT_NODE = 1;
+				htmlInfo = "<html><head><title>Display</title></head><body>";
+				htmlInfo += "<table border='2'>"
+				table = xmlDoc.getElementsByTagName("Table");
+                
+				if(table.length!=1){
+					alert("Error: Insufficient XML data (No table present)");
+					htmlInfo = null;
+				}
+				else if(table.length==1 && table[0].getElementsByTagName('Header').length!=1){
+					alert("Error: Insufficient XML data (No header present)");
+					htmlInfo = null;
+				}
+				else if(table.length==1 && table[0].getElementsByTagName('Header')[0].getElementsByTagName('Data').length!=6){
+					alert("Error: Insufficient XML data (Insufficient number of headers)");
+					htmlInfo = null;
+				}
+				else if(table.length==1 && table[0].getElementsByTagName('Row').length==0){
+					alert("Error: Insufficient XML data (No airline information)");
+					htmlInfo = null;
+				}
+				else{
+					headers = table[0].getElementsByTagName('Header')[0].getElementsByTagName('Data');
+					rows = table[0].getElementsByTagName('Row');
+
+					htmlInfo += "<tr>";
+					for(var i = 0; i < headers.length; i++){
+						if(headers[i].firstChild)
+							htmlInfo += "<th>" + headers[i].firstChild.nodeValue.trim() + "</th>";
+						else
+							htmlInfo += "<th></th>";
+					}
+					htmlInfo += "</tr>";
+
+					for(var i = 0; i < rows.length; i++){
+						htmlInfo += "<tr>";
+						entries = rows[i].childNodes;
+						for (var j = 0; j < entries.length; j++){
+							if(entries[j].nodeType==ELEMENT_NODE){
+								if(entries[j].nodeName=='Hubs'){
+									htmlInfo += "<td><ul>"
+									hublist = entries[j].childNodes;
+									for (var k = 0; k < hublist.length; k++){
+										if(hublist[k].nodeType==ELEMENT_NODE){
+											if(hublist[k].firstChild)
+												htmlInfo += "<li>" + hublist[k].firstChild.nodeValue.trim() + "</li>";
+											else
+												htmlInfo += "<li></li>";
+										}
+									}
+									htmlInfo += "</ul></td>";
+								}
+								else if(entries[j].nodeName=='HomePage'){
+									if(entries[j].firstChild)
+										htmlInfo += "<td><a href='" + entries[j].firstChild.nodeValue.trim() + "'>" + entries[j].firstChild.nodeValue.trim() + "</a></td>";
+									else
+										htmlInfo += "<td></td>";
+								}
+								else if(entries[j].nodeName=='Plane'){
+									if(entries[j].firstChild)
+										htmlInfo += "<td><img src='" + entries[j].firstChild.nodeValue.trim() + "' width='300'/></td>";
+									else
+										htmlInfo += "<td></td>";
+								}
+								else{
+									if(entries[j].firstChild)
+										htmlInfo += "<td>" + entries[j].firstChild.nodeValue.trim() + "</td>";
+									else
+										htmlInfo += "<td></td>";
+								}
+							}
+						}
+						htmlInfo += "</tr>";
+					}
+				}
+			}
+
+			function showTable(filename){
+				filename = filename.trim();
+				if(filename=='')
+					alert("No filename provided");
+				else{
+					xmlDocument = loadXML(filename);
+					if(xmlDocument==null)
+						alert("Error: File does not exist");
+					else if(xmlDocument==-1)
+						alert("Error: Invalid XML format");
+					else{
+						xmlDocument.onload = generateInfo(xmlDocument);
+						if(htmlInfo!=null){
+							newWindow = window.open("", "Homework 4", "height=500,width=1000");
+							newWindow.document.write(htmlInfo);
+							newWindow.document.close();
+						}
+					}
+				}
+			}
+
+			function loadXML(url) {
+      			if (window.XMLHttpRequest){
+      				// code for IE7+, Firefox, Chrome, Opera, Safari
+       				xmlhttp=new XMLHttpRequest();   
+       			}
+ 				else {
+ 					// code for IE6, IE5
+    				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");  
+    			}
+  				xmlhttp.open("GET",url,false);
+  				xmlhttp.send(null);
+  				xmlDoc=xmlhttp.responseXML;
+  				if(xmlhttp.status==200 && xmlDoc==null)
+  					xmlDoc = -1;
+  				else if(xmlhttp.status!=200)
+  					xmlDoc = null;
+  				return xmlDoc;
+  			}
+
+  			function checkEnter(e){
+  				if(e.keyCode==13){
+  					showTable(document.getElementsByTagName('input')[0].value);
+  					return false;
+  				}
+  				return true;
+  			}
+		</script>
+	</head>
+
+	<body>
+		<div style="text-align: center; width: 100%; height:100%; margin-top: 10%">
+			<h4 style="margin-bottom: 20px">Enter URL for Airlines List XML File</h4>
+			<input type="text" style="margin-bottom: 20px" onkeypress="return checkEnter(event)"><br>
+			<button type="button" onclick="showTable(document.getElementsByTagName('input')[0].value)">Submit Query</button>
+		</div>
+	</body>
+</html>

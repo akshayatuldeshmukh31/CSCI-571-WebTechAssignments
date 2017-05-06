@@ -1,0 +1,235 @@
+body{
+	padding-bottom: 2em;
+	overflow-x: hidden;
+}
+
+.noGutter{
+	padding: 0;
+	margin: 0;
+}
+
+.tabbedView{
+	text-align: center;
+	outline: none;
+}
+
+.container{
+	width: 100%;
+}
+.top-tab-menu{
+	border-bottom: 0.12em solid #034f84;
+}
+
+.nav-tabs>li>a, .nav-pills>li>a{
+  background-color: white;
+  border-radius: 0em !important;
+  border: none !important;
+  color: black;
+  outline: none !important;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  color: white;
+  background-color: #034f84;
+  border: 0.12em solid #034f84;
+}
+
+.nav-tabs>li>a:hover, .nav-pills>li>a:hover {
+  border-color: white;
+  background-color: white;
+}
+
+.all-tables{
+	padding: 1.5em 1.5em 1em 1.5em; 
+}
+
+.all-tables table tbody td{
+	vertical-align: middle;
+}
+
+.btn-secondary{
+	background-color: white;
+	border: 0.1em solid #9fa9a3;
+}
+
+.btn-secondary:hover{
+	background-color: #f0f0f0;
+}
+
+.glyphicon-star{
+	color: yellow;
+}
+
+.align-buttons{
+	text-align: center;
+}
+
+.prev-button{
+	margin-right: 2em; 
+	width: 7em; 
+	height: 3em;
+}
+
+.next-button{
+	width: 7em; 
+	height: 3em;
+}
+
+.albumsPosts{
+	margin: 1em 1em 1em 1em;
+	clear: both;
+}
+
+.back-button{
+	padding: 0.7em 1em 1em 0.5em;
+}
+
+.favorite-button{
+	padding-top: 0.85em;
+	padding-bottom: 0.85em;
+	margin-right: 1em;
+}
+
+.fb-button-image{
+	width: 1.8em;
+	height: 1.8em;
+}
+
+.left-side-button{
+	float: left;
+}
+
+.right-side-button{
+	float: right;
+}
+
+.album-panel{
+	padding-right: 3em;
+	clear: both;
+}
+
+.post-panel{
+	padding-left: 3em;
+}
+
+.post-well{
+	background-color: white;
+}
+
+.post-name-header{
+	font-size: 1em; 
+	margin-bottom: 0em;
+}
+
+.post-date-header{
+	font-size: 0.95em; 
+	margin-top: 0.3em; 
+	color: #b2b2b2;
+}
+
+.top-bar-albums-posts{
+	margin-bottom: 4em;
+}
+
+.well-style{
+	color: brown;
+	background-color: #fbefcc;
+}
+
+.slide-from-left{
+	position: relative;
+	top: 0;
+	right: 0;
+}
+
+.slide-from-right{
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+#userTable.ng-hide, #pageTable.ng-hide, #eventTable.ng-hide, #groupTable.ng-hide, #placeTable.ng-hide, #favTable.ng-hide{
+	top: 0;
+	left: 100%;
+}
+
+#userAlbsPosts.ng-hide, #pageAlbsPosts.ng-hide, #eventAlbsPosts.ng-hide, #groupAlbsPosts.ng-hide, #placeAlbsPosts.ng-hide, #favAlbsPosts.ng-hide{
+	top: 0;
+	right: 100%;
+}
+
+.ng-hide-remove{
+	transition: all linear 0.5s;
+}
+
+#topBarForm{
+	padding: 0.6em 0px 0px 1.4em;
+	margin: 0;
+	background-color: #f0f0f0;
+	border-bottom: 0.1em solid #eaece5;
+}
+
+#fbSearchHeader{
+	color: #034f84;
+	padding-top: 0.4em;
+	font-size: 1.2em;
+	font-weight: normal;
+}
+
+#clearButton{
+	background-color: white;
+    border: 0.1em solid #034f84;
+    color: #034f84;
+    padding: 0.2em 0.7em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.1em;
+    margin: 0.16em 0em;
+    cursor: pointer;
+}
+
+#clearButton:hover{
+	background-color: #eaece5;
+}
+
+#textFieldTopBar{
+	border-radius: 0em;
+}
+
+#searchButtonTopBar{
+	border-radius: 0em;
+	padding: 0.4em 2em;
+	color: white;
+	background-color: #034f84;
+}
+
+@media only screen and (max-width: 750px) {
+	.top-tab-menu>ul>li>a{
+		padding: 0 !important;
+		font-size: 1em;
+	}
+
+	.table-border-small-devices{
+		border: 0.21em solid #9fa9a3; 
+		margin: 0.3em 1em 0.3em 1em; 
+		overflow: hidden; 
+		height: auto;
+	}
+
+	.all-tables{
+		padding: 0;
+	}
+
+	.album-panel{
+		padding: 0;
+	}
+
+	.post-panel{
+		padding: 0;
+	}
+
+	#searchButtonTopBar{
+		padding: 0.4em 1em;
+	}
+}
